@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Valentine? ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#fff;
+  font-family:Arial, sans-serif;
+  overflow:hidden;
+}
+
+/* Main Box */
+.box{
+  background:white;
+  padding:50px;
+  border-radius:0;
+  text-align:center;
+  width:100%;
+  height:100%;
+  box-shadow:none;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Buttons */
+button{
+  padding:12px 30px;
+  border:none;
+  border-radius:25px;
+  font-size:18px;
+  cursor:pointer;
+  margin:15px;
+}
+
+#yesBtn{
+  background:#ff4d6d;
+  color:white;
+}
+
+#noBtn{
+  background:#999;
+  color:white;
+  position:absolute;
+}
+
+/* Note */
+.note{
+  font-size:14px;
+  color:red;
+  margin-top:15px;
+}
+
+/* Confetti */
+.confetti{
+  position:fixed;
+  width:10px;
+  height:10px;
+  background:red;
+  top:-10px;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="questionBox">
+  <h1>Will You Be My Valentine? ❤️</h1>
+
+  <div>
+    <button id="yesBtn">Yes 😍</button>
+    <button id="noBtn">No 😜</button>
+  </div>
+
+  <div class="note">
+    ⚠️ Don't touch NO, you will regret 😈
+  </div>
+</div>
+
+
+<div class="box" id="resultBox" style="display:none;">
+  <h1>Yahh! 😍🎉</h1>
+  <h2>I knew you will say YES ❤️</h2>
+  <h2>Thank you,bye👋 </h2>
+</div>
+
+
+<script>
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const questionBox = document.getElementById("questionBox");
+const resultBox = document.getElementById("resultBox");
+
+
+/* Move NO button */
+noBtn.addEventListener("mouseover", ()=>{
+
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+
+});
+
+
+/* YES Click */
+yesBtn.addEventListener("click", ()=>{
+
+  questionBox.style.display = "none";
+  resultBox.style.display = "flex";
+
+  startConfetti();
+
+});
+
+
+/* Confetti Effect */
+function startConfetti(){
+
+  for(let i=0;i<180;i++){
+
+    const conf = document.createElement("div");
+    conf.classList.add("confetti");
+
+    conf.style.left = Math.random()*100 + "vw";
+    conf.style.background =
+      `hsl(${Math.random()*360},100%,60%)`;
+
+    conf.style.animationDuration =
+      (Math.random()*3 + 2) + "s";
+
+    document.body.appendChild(conf);
+
+    setTimeout(()=>{
+      conf.remove();
+    },5000);
+
+  }
+}
+
+</script>
+
+</body>
+</html>
